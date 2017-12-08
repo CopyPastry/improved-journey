@@ -48,11 +48,9 @@ function hideModal() {
 
 }
 
-function filter () {
-  addElementToArray();
+function filter() {
   var text = document.getElementById('filter-title').value.toLowerCase(); //user inputs
   var title = [];
-
 
   //stores title of elements into the array
   for(var i = 0; i < 8; i++) {
@@ -69,15 +67,17 @@ function filter () {
   }
 }
 
+filterButton.addEventListener('click', filter);
+
 function modalAccept() {
   var title = document.getElementById('video-text-input').value.trim();
   var url = document.getElementById('video-source-input').value.trim();
+
 
   if (!title || !url) {
     alert("You must fill in all of the fields!");
   }
   else {
-
     var postRequest = new XMLHttpRequest();
     var postURL = "/post";
     postRequest.open('POST', postURL);

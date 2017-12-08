@@ -1,11 +1,4 @@
 <main class="content">
-
-  <section id="videos">
-    {{#each video}}
-      {{> insertVideo}}
-    {{/each}}
-  </section>
-
   <aside class="filter-container">
     <h2>Filters</h2>
     <div class="filter-input-container">
@@ -22,6 +15,12 @@
     <button id="filter-update-button" class="action-button">Update</button>
 
   </aside>
+  
+  <section id="videos">
+    {{#each video}}
+      {{> insertVideo}}
+    {{/each}}
+  </section>
   </main>
 
 <button type="button" id="add-video-button"><i class="fa fa-plus"></i></button>

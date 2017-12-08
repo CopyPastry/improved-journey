@@ -135,3 +135,70 @@ body {
   background-color: rgb(204, 170, 204);
   border-radius: 3px;
 }
+
+/* header */
+
+
+header {
+  display: flex;
+  background-color: rgb(204, 170, 204);
+  height: 180px;
+}
+
+.site-title {
+  font-size: 75px;
+
+}
+
+.site-title > a {
+  font-family: helvetica;
+  text-decoration: none;
+  position: relative;
+  left: 100px;
+  color: white;
+
+}
+
+
+.filter-input-label {
+  color: black;
+}
+#filter-min-price {
+  height: 15px;
+  width: 51.5px;
+  position: relative;
+  right: -5px;
+}
+#filter-max-price {
+  height: 15px;
+  width: 60px;
+  position: relative;
+  right: -10px;
+}
+
+#filter-update-button {
+  color: white;
+  background-color: black;
+  border: none;
+  color: yellow;
+  padding: 10px 50px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-family: helvetica;
+  position: relative;
+  width: 180px;
+}
+
+#filter-update-button:hover {
+   background-color: white;
+   color: black;
+}
+.content > .filter-container {/* keep */
+  padding: 20px;
+  background-color: rgb(240,240,240);
+  position: relative;
+  right: 10px;
+}

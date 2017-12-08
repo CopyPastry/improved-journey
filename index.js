@@ -1,6 +1,5 @@
 var videos = [];
 
-
 function insertVideo(title, videoId) {
   var newVideo = {
     title: title,
@@ -48,27 +47,6 @@ function hideModal() {
 
 }
 
-function filter() {
-  var text = document.getElementById('filter-title').value.toLowerCase(); //user inputs
-  var title = [];
-
-  //stores title of elements into the array
-  for(var i = 0; i < 8; i++) {
-    title[i] = videos[i].getElementsByClassName('video')[0].text.toLowerCase();
-  }
-
-  //filters for title
-  for(var i = 0; i < 8; i++) {
-    if (text != "") { //checks for emptiness
-      if (title[i].indexOf(text) === -1) {
-        videos[i].style.display = "none";
-      }
-    }
-  }
-}
-
-filterButton.addEventListener('click', filter);
-
 function modalAccept() {
   var title = document.getElementById('video-text-input').value.trim();
   var url = document.getElementById('video-source-input').value.trim();
@@ -86,11 +64,6 @@ function modalAccept() {
     var match = url.match(parser);
     var videoId;
     if (match && match[2].length == 11) {
-      //
-      // videos.push({
-      //   title: title,
-      //   videoId: videoId
-      // });
 
       videoId = match[2];
       videoObj = {

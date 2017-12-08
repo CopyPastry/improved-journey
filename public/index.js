@@ -39,6 +39,36 @@ function newText (title, videoId) {
 
 }
 
+function deleteVideo (videoId) {
+  var request = new XMLHttpRequest();
+  var requestURL = '/deleteVideo';
+  request.open('POST', requestURL);
+
+  var deleteOb = {
+    videoId: videoId
+  };
+
+  var body = JSON.stringify(deleteOb);
+  request.setRequestHeader('Content-Type', 'application/json');
+
+  request.addEventListener('load', function(event) {
+    if (event.target.status !== 200) {
+      var message = event.target.response;
+      alert ("error deleting video");
+    }
+    else {
+      del (videoId);
+    }
+  });
+
+  request.send(body);
+}
+
+function del (videoId)  {
+  var video = document.getElementById(videoId);
+  video.remove();
+}
+
 function showModal() {
 
   var modal = document.getElementById('modal');
@@ -119,6 +149,17 @@ window.addEventListener('DOMContentLoaded', function () {
   var hideModalButton = document.getElementsByClassName('modal-hide-button');
   for (var i = 0; i < hideModalButton.length; i++) {
     hideModalButton[i].addEventListener('click', hideModal);
+  }
+
+  var postDelete = document.getElementById('post-delete');
+  if (postDelete) {
+    postDelete.addEventListener('click', function () {
+      var button = event.currentTarget;
+      var videoPost = videoId.parentElement;
+      var videoId = videoPost.getAttribute('url');
+      console.log (videoId);
+      //deleteVideo(videoId);
+    });
   }
 
 });

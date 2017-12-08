@@ -9,12 +9,8 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var handlebars = require('express-handlebars');
-<<<<<<< HEAD
 var MongoClient = require('mongodb').MongoClient;
 //var videos = require('./videos.json');
-=======
-var videos = require('./videos.json');
->>>>>>> 45623041cebcbca8b16893cde6acef42be4f432d
 var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 4112;
@@ -54,17 +50,18 @@ app.get('*', function (req, res) {
   console.log("== Server status", res.statusCode);
 });
 
-app.post('/post', function (req, res) {
-  console.log("== request body:", req.body);
-  videos.push({
-    title: req.body.title,
-    videoId: req.body.videoId
-  });
-  console.log("== new video:", videos);
-  res.status(200).send("Success");
+app.post('/deleteVideo', function (req, res) {
+  if (req.body && req.body.videoId) {
+    var collection = mongoConnection.collection('final');
+    collection.remove({videoId: req.body.videoId}, {justOne: true});
+    res.status(200).send("removed");
+  }
+  else {
+    res.status(400).send("rip");
+  }
 });
 
-app.post('/addVideo', function (req, res, next) {
+app.post('/addVideo', function (req, res) {
 
 if (req.body && req.body.title && req.body.videoId) {
   var collection = mongoConnection.collection('final');

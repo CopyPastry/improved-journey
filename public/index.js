@@ -12,6 +12,33 @@ function insertVideo(title, videoId) {
   videos.insertAdjacentHTML('beforeend', appendVideo);
 }
 
+function newText (title, videoId) {
+  var request = new XMLHttpRequest();
+  var requestURL = '/addVideo';
+  request.open('POST', requestURL);
+
+  var videoOb = {
+    title: title,
+    videoId: videoId
+  };
+
+  var body = JSON.stringify(videoOb);
+  request.setRequestHeader('Content-Type', 'application/json');
+
+  request.addEventListener('load', function(event) {
+    if (event.target.status !== 200) {
+      var message = event.target.response;
+      alert ("Error storing video");
+    }
+    else  {
+      insertVideo (title, videoId);
+    }
+  });
+
+  request.send(body);
+
+}
+
 function showModal() {
 
   var modal = document.getElementById('modal');
@@ -67,7 +94,8 @@ function modalAccept() {
       });
 
       videoId = match[2];
-      insertVideo(title, videoId);
+      newText(title, videoId);
+      //insertVideo(title, videoId);
       hideModal();
     } else {
       alert("Please enter a valid URL.");

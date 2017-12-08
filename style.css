@@ -144,15 +144,6 @@ header {
   height: 180px;
 }
 
-.filter-container {
-  min-width: 225px;
-  max-width: 225px;
-  margin: 10px 10px auto 10px;
-  padding: 20px;
-  border-radius: 3px;
-  background-color: #efefef;
-}
-
 .site-title {
   font-size: 75px;
 

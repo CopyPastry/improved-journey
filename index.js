@@ -84,18 +84,40 @@ function modalAccept() {
   }
   else {
 
+    var postRequest = new XMLHttpRequest();
+    var postURL = "/post";
+    postRequest.open('POST', postURL);
+
     var parser = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(parser);
     var videoId;
     if (match && match[2].length == 11) {
-
-      videos.push({
-        title: title,
-        videoId: videoId
-      });
+      //
+      // videos.push({
+      //   title: title,
+      //   videoId: videoId
+      // });
 
       videoId = match[2];
-      insertVideo(title, videoId);
+      videoObj = {
+        title: title,
+        videoId: videoId
+      };
+      videos.push(videoObj);
+
+      var requestBody = JSON.stringify(videoObj);
+      postRequest.setRequestHeader('Content-Type', 'application/json');
+
+      postRequest.addEventListener('load', function (event) {
+        if (event.target.status !== 200) {
+          alert("Error inserting video in database:\n\n\n" + event.target.response);
+        } else {
+          insertVideo(title, videoId);
+        }
+      });
+
+      postRequest.send(requestBody);
+
       hideModal();
     } else {
       alert("Please enter a valid URL.");

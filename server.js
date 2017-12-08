@@ -10,14 +10,17 @@ var path = require('path');
 var express = require('express');
 var handlebars = require('express-handlebars');
 var videos = require('./videos.json');
+var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 4111;
 
-app.engine( 'handlebars', handlebars( {
+app.engine('handlebars', handlebars( {
   defaultLayout: 'main',
 }));
 
-app.set( 'view engine', 'handlebars' );
+app.set('view engine', 'handlebars');
+
+app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
   res.status(200).render('index', {
@@ -26,25 +29,21 @@ app.get('/', function (req, res) {
   console.log("== Server status", res.statusCode);
 });
 
-// app.get('/posts/:num', function (req, res, next) {
-//   var postId = req.params.num;
-//   if (postData[postId]) {
-//     var data = [postData[postId]];
-//
-//     res.status(200).render('index', {
-//       post: data,
-//       select: data
-//     });
-//   } else {
-//     next();
-//   }
-// });
-
 app.use(express.static('public'));
 
- app.get('*', function (req, res) {
-   res.status(404).render('404');
-   console.log("== Server status", res.statusCode);
+app.get('*', function (req, res) {
+  res.status(404).render('404');
+  console.log("== Server status", res.statusCode);
+});
+
+app.post('/post', function (req, res) {
+  console.log("== request body:", req.body);
+  videos.push({
+    title: req.body.title,
+    videoId: req.body.videoId
+  });
+  console.log("== new video:", videos);
+  res.status(200).send("Success");
 });
 
 app.listen(port, function () {

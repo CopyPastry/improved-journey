@@ -134,6 +134,14 @@ function modalAccept() {
 
 }
 
+function deleteButton () {
+  var button = event.currentTarget;
+  var videoPost = button.parentElement;
+  var videoId = videoPost.getAttribute('url');
+  console.log (videoId);
+  deleteVideo(videoId);
+}
+
 window.addEventListener('DOMContentLoaded', function () {
 
   var addVideoButton = document.getElementById('add-video-button');
@@ -151,15 +159,11 @@ window.addEventListener('DOMContentLoaded', function () {
     hideModalButton[i].addEventListener('click', hideModal);
   }
 
-  var postDelete = document.getElementById('post-delete');
-  if (postDelete) {
-    postDelete.addEventListener('click', function () {
-      var button = event.currentTarget;
-      var videoPost = videoId.parentElement;
-      var videoId = videoPost.getAttribute('url');
-      console.log (videoId);
-      //deleteVideo(videoId);
-    });
+  var postDelete = document.getElementsByClassName('post-delete-button');
+  for (var i = 0; i < postDelete.length; i++) {
+  if (postDelete[i]) {
+    postDelete[i].addEventListener('click', deleteButton);
+  }
   }
 
 });

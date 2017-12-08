@@ -11,7 +11,7 @@ var express = require('express');
 var handlebars = require('express-handlebars');
 var videos = require('./videos.json');
 var app = express();
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 4111;
 
 app.engine( 'handlebars', handlebars( {
   defaultLayout: 'main',
@@ -42,10 +42,10 @@ app.get('/', function (req, res) {
 
 app.use(express.static('public'));
 
-// app.get('*', function (req, res) {
-//   res.status(404).render('404');
-//   console.log("== Server status", res.statusCode);
-// });
+ app.get('*', function (req, res) {
+   res.status(404).render('404');
+   console.log("== Server status", res.statusCode);
+});
 
 app.listen(port, function () {
   console.log("== Server is listening on port", port);

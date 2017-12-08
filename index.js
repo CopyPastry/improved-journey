@@ -1,5 +1,6 @@
 var videos = [];
 
+
 function insertVideo(title, videoId) {
   var newVideo = {
     title: title,
@@ -46,34 +47,27 @@ function hideModal() {
   clearModalInputs();
 
 }
-/*
-//filters for min
-for(var i = 0; i < 8; i++) {
-  if(min != "") { //checks if min is not empty
-    if (price[i] < min) {
-      allPostElems[i].style.display = "none";
+
+function filter () {
+  addElementToArray();
+  var text = document.getElementById('filter-title').value.toLowerCase(); //user inputs
+  var title = [];
+
+
+  //stores title of elements into the array
+  for(var i = 0; i < 8; i++) {
+    title[i] = videos[i].getElementsByClassName('video')[0].text.toLowerCase();
+  }
+
+  //filters for title
+  for(var i = 0; i < 8; i++) {
+    if (text != "") { //checks for emptiness
+      if (title[i].indexOf(text) === -1) {
+        videos[i].style.display = "none";
+      }
     }
   }
 }
-
-//filters for max
-for(var i = 0; i < 8; i++) {
-  if (max != "") { //checks if max is not empty
-    if (price[i] > max) {
-      allPostElems[i].style.display = "none";
-    }
-  }
-}
-
-//filters for title
-for(var i = 0; i < 8; i++) {
- if (text != "") { //checks for emptiness
-   if (title[i].indexOf(text) === -1) {
-     allPostElems[i].style.display = "none";
-   }
- }
-}
-*/
 
 function modalAccept() {
   var title = document.getElementById('video-text-input').value.trim();
